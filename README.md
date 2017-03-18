@@ -9,5 +9,5 @@ export FOREST_AUTH_SECRET=7-b5!9Gqs-2dkwfG
 
 after lunch app ==> node index.js
 
-go to your website and run http://app.forestadmin.com
+go to your browser and run http://app.forestadmin.com
 
