@@ -38,7 +38,7 @@ app.get('/api/user:_id', function(req, res) {
 app.post('/api/user', urlencodedParser, function(req, res) {
 	var user = req.body;
 	console.log(user);
-	Users.addUser(user, function(err, user) {
+	User.addUser(user, function(err, user) {
 		if (err) {throw err;}
 		res.json(user);
 	});
