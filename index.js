@@ -27,6 +27,18 @@ app.get('/api/users', function(req, res) {
 	});
 });
 
+app.get('/api/user/:firstname/:lastname', function(req, res) {
+	var params = {
+		"firstname": req.param.s.firstname,
+		"lastname": req.param.s.lastname
+	};
+	console.log(params);
+	res.json(params);
+	/*User.getUserByName(function(req, res) {
+
+	});*/
+});
+
 app.get('/api/user:_id', function(req, res) {
 	User.getUserById(req.param.s._id, function(err, user) {
 		if (err) {throw err;}
