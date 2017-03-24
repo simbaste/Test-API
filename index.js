@@ -9,6 +9,7 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/books');
 var db = mongoose.connection;
 
+
 // Setup the Forest Liana middleware in your app.js file
 app.use(require('forest-express-mongoose').init({
   modelsDir: __dirname + '/models', // Your models directory.
