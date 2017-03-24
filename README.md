@@ -1,4 +1,4 @@
-This is my Firs test API With NodeJS and MongoDB (mongoose ROM)
+This is my First test API With NodeJS and MongoDB (mongoose ROM)
 
 I use forest to manage users in my data base
 
@@ -10,4 +10,6 @@ export FOREST_AUTH_SECRET=7-b5!9Gqs-2dkwfG
 after lunch app ==> node index.js
 
 go to your browser and run http://app.forestadmin.com
+
+start mongoDB ==> brew service start mongod || service start mongod
 

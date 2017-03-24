@@ -20,7 +20,6 @@ module.exports.getGenres = function(callback, limit) {
 };
 
 module.exports.addGenre = function(genre, callback) {
-    console.log("Je suis dans le fonction addGenre");
     console.log(genre);
     Genre.create(genre, callback);
 };
