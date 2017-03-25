@@ -10,7 +10,7 @@ var adviceMsgSchema = mongoose.Schema({
 		required: true
 	},
 	likes: {
-		type: Number
+		type: Number,
 		default: 0
 	},
 	position: {

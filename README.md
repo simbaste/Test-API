@@ -1,5 +1,7 @@
 This is my First test API With NodeJS and MongoDB (mongoose ROM)
 
+Install mongoDB to your computer
+
 I use forest to manage users in my data base
 
 set env variables:
@@ -11,5 +13,5 @@ after lunch app ==> node index.js
 
 go to your browser and run http://app.forestadmin.com
 
-start mongoDB ==> brew service start mongod || service start mongod
+start mongoDB ==> brew services start mongod || service start mongod
 
