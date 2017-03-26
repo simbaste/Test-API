@@ -36,3 +36,11 @@ module.exports.addAdviceMsg = function(adviceMsg, callback) {
     console.log(adviceMsg);
     AdviceMsg.create(adviceMsg, callback);
 };
+
+module.exports.getAdviceMsgByAuthor = function(author, callback) {
+	AdviceMsg.find(author, callback);
+};
+
+module.exports.delAdviceMsg = function(adviceMsg, callback) {
+	User.remove(adviceMsg, callback);
+};

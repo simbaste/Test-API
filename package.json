@@ -10,6 +10,9 @@
     "body-parser": "*",
     "express": "*",
     "forest-express-mongoose": "^1.0.3",
+    "sync": "*",
+    "deasync": "*",
+    "bluebird": "*",
     "mongoose": "*"
   },
   "author": "simbaste",
