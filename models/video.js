@@ -43,7 +43,15 @@ module.exports.getVideoById = function(id, callback) {
     Video.findById(id, callback);
 };
 
+module.exports.getVideosByAuthor = function(author, callback) {
+	Video.find(author, callback);
+};
+
 module.exports.addVideo = function(video, callback) {
     console.log(video);
     Video.create(video, callback);
+};
+
+module.exports.delVideo = function(video, callback) {
+	Video.remove(video, callback);
 };

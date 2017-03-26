@@ -43,7 +43,15 @@ module.exports.getPhotoById = function(id, callback) {
     Photo.findById(id, callback);
 };
 
+module.exports.getPhotosByAuthor = function(author, callback) {
+	Photo.find(author, callback);
+};
+
 module.exports.addPhoto = function(photo, callback) {
     console.log(photo);
     Photo.create(photo, callback);
+};
+
+module.exports.delPhoto = function(photo, callback) {
+	Photo.remove(photo, callback);
 };
