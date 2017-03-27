@@ -41,6 +41,20 @@ app.get('/api/firstname/:fname/lastname/:lname', function(req, res) {
 	});
 });
 
+app.get('/api/lastnamename/:lname', function(req, res) {
+	User.getUsersByLastname(req.params.lname, function(err, users) {
+		if (err) {throw err;}
+		users ? res.json(users) : res.json({success: false, error: true, message: "Users not found"});
+	});
+});
+
+app.get('/api/firstname/:fname', function(req, res) {
+	User.getUsersByFirstname(req.params.fname, function(err, users) {
+		if (err) {throw err;}
+		users ? res.json(users) : res.json({success: false, error: true, message: "Users not found"});
+	});
+});
+
 app.get('/api/user/:_id', function(req, res) {
 	User.getUserById(req.params._id, function(err, user) {
 		if (err) {throw err;}
@@ -120,21 +134,36 @@ app.post('/api/user/:_id/friend', urlencodedParser, function(req, res) {
 
 	User.getFriend(req.params._id, friend, function(err, doc) {
 		if (err) {throw err;}
-		var MyFriend = doc.friends;
-		if (MyFriend.lenght > 0) {
-			response = {success: false, error: true, message: "Friend already exist"};
-		} else {
-			User.addFriend(req.params._id, friend, function(err, doc) {
-				if (err) {throw err;}
-				isOk = 1;
-			});
-		}
-		while(isOk != 1) {
-      		require('deasync').runLoopOnce();
+		if (doc) {
+			var MyFriend = doc.friends;
+			if (MyFriend.lenght > 0) {
+		 		response = {success: false, error: true, message: "Friend already exist"};
+			} else {
+				User.getUser(friend, function(err, MyFriend) {
+					if (MyFriend) {
+						friend._id = MyFriend._id;
+						User.addFriend(req.params._id, friend, function(err, doc) {
+							if (err) {throw err;}
+							isOk = 1;
+						});
+						while(isOk != 1) {
+      						require('deasync').runLoopOnce();
+    					}
+					} else {
+						response = {success: false, error: true, message: "Friend not found"};
+					}
+    				isOk = 2;
+				});
+			}
+			while(isOk != 2) {
+      			require('deasync').runLoopOnce();
+    		}
+    	} else {
+    		response = {success: false, error: true, message: "User not found"};
     	}
-    	isOk = 2;
+    	isOk = 3;
 	});
-	while(isOk != 2) {
+	while(isOk != 3) {
       require('deasync').runLoopOnce();
     }
 	res.json(response);
@@ -148,6 +177,49 @@ app.get('/api/groups', function(req, res) {
 		if (err) {throw err;}
 		res.json(groups);
 	});
+});
+
+app.post('/api/user/:_id/group', urlencodedParser, function(req, res) {
+	var group = req.body;
+
+	var response = {success: true, error: false, message: "Success"};
+	var isOk = 0;
+
+	User.getGroup(req.params._id, friend, function(err, doc) {
+		if (err) {throw err;}
+		if (doc) {
+			var MyGroup = doc.groups;
+			if (MyGroup.lenght > 0) {
+		 		response = {success: false, error: true, message: "User already in this group"};
+			} else {
+				Group.getGroup(group, function(err, MyGroup) {
+					if (MyGroup) {
+						group._id = MyGroup._id;
+						User.addGroup(req.params._id, friend, function(err, doc) {
+							if (err) {throw err;}
+							isOk = 1;
+						});
+						while(isOk != 1) {
+      						require('deasync').runLoopOnce();
+    					}
+					} else {
+						response = {success: false, error: true, message: "Group not found"};
+					}
+    				isOk = 2;
+				});
+			}
+			while(isOk != 2) {
+      			require('deasync').runLoopOnce();
+    		}
+    	} else {
+    		response = {success: false, error: true, message: "User not found"};
+    	}
+    	isOk = 3;
+	});
+	while(isOk != 3) {
+      require('deasync').runLoopOnce();
+    }
+	res.json(response);
 });
 
 app.get('/api/group/:_id', function(req, res) {

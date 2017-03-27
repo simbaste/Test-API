@@ -53,6 +53,10 @@ module.exports.getUserByName = function(name, callback) {
     	lastname: name.lastname}, callback);
 };
 
+module.exports.getUser = function(user, callback) {
+	User.findOne(user, callback);
+};
+
 module.exports.addUser = function(user, callback) {
 	var isOk = false;
     var response = {success: true, error: false, message: "Success"};
@@ -81,9 +85,25 @@ module.exports.addFriend = function(id, friend, callback) {
 	User.findOneAndUpdate({_id: id}, {$push: {friends: friend}}, callback);
 };
 
+module.exports.addGroup = function(id, group, callback) {
+	User.findOneAndUpdate({_id: id}, {$push: {groups: group}}, callback);
+};
+
 module.exports.getFriend = function(id, friend, callback) {
    	User.findOne({_id: id},
     {friends: {$elemMatch: {firstname: friend.firstname, lastname: friend.lastname}}}, callback);
+};
+
+module.exports.getGroup = function(id, group, callback) {
+	User.findOne({_id: id}, {groups: {$elemMatch: group}}, callback);
+};
+
+module.exports.getUsersByLastname = function(lname, callback) {
+	User.find({lastname: lname}, callback);
+};
+
+module.exports.getUsersByFirstname = function(fname, callback) {
+	User.find({firstname: fname}, callback);
 };
 
 module.exports.delUser = function(user, callback) {

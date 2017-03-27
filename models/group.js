@@ -29,6 +29,10 @@ module.exports.getGroupById = function(id, callback) {
     Group.findById(id, callback);
 };
 
+module.exports.getGroup = function(group, callback) {
+	Group.findOne(group, callback);
+};
+
 module.exports.getGroupByAuthor = function(author, callback) {
 	Group.find(author, callback);
 };
